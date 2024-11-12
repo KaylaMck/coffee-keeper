@@ -1,0 +1,120 @@
+{
+  "user": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "email": "johndoe@example.com",
+      "username": "jdoe"
+    },
+    {
+      "id": 2,
+      "name": "Jane Smith",
+      "email": "janesmith@example.com",
+      "username": "jsmith"
+    },
+    {
+      "id": 3,
+      "name": "Alex Johnson",
+      "email": "alexjohnson@example.com",
+      "username": "ajohnson"
+    },
+    {
+      "id": 4,
+      "name": "Emma Brown",
+      "email": "emmabrown@example.com",
+      "username": "ebrown"
+    },
+    {
+      "id": 5,
+      "name": "Chris Lee",
+      "email": "chrislee@example.com",
+      "username": "clee"
+    }
+  ],
+  "coffee": [
+    {
+      "id": 1,
+      "name": "Morning Blend",
+      "description": "A smooth, light roast perfect for starting the day.",
+      "userId": 1,
+      "coffeeTypeId": 1,
+      "roastId": 1
+    },
+    {
+      "id": 2,
+      "name": "Dark Thunder",
+      "description": "Bold and rich, with hints of chocolate.",
+      "userId": 2,
+      "coffeeTypeId": 2,
+      "roastId": 3
+    },
+    {
+      "id": 3,
+      "name": "Sunrise Delight",
+      "description": "A fruity, medium roast that’s bright and lively.",
+      "userId": 3,
+      "coffeeTypeId": 3,
+      "roastId": 2
+    },
+    {
+      "id": 4,
+      "name": "Midnight Velvet",
+      "description": "A dark roast with deep, smoky flavors.",
+      "userId": 4,
+      "coffeeTypeId": 1,
+      "roastId": 3
+    },
+    {
+      "id": 5,
+      "name": "Hazelnut Heaven",
+      "description": "A flavored coffee with the sweet aroma of hazelnuts.",
+      "userId": 5,
+      "coffeeTypeId": 2,
+      "roastId": 1
+    },
+    {
+      "id": 6,
+      "name": "Classic Espresso",
+      "description": "Rich and bold, perfect for making espresso shots.",
+      "userId": 1,
+      "coffeeTypeId": 2,
+      "roastId": 3
+    },
+    {
+      "id": 7,
+      "name": "Colombian Gold",
+      "description": "A balanced medium roast with nutty notes.",
+      "userId": 2,
+      "coffeeTypeId": 1,
+      "roastId": 2
+    }
+  ],
+  "roast": [
+    {
+      "id": 1,
+      "roastType": "Light"
+    },
+    {
+      "id": 2,
+      "roastType": "Medium"
+    },
+    {
+      "id": 3,
+      "roastType": "Dark"
+    }
+  ],
+  "coffeeType": [
+    {
+      "id": 1,
+      "typeName": "Ground"
+    },
+    {
+      "id": 2,
+      "typeName": "Whole Bean"
+    },
+    {
+      "id": 3,
+      "typeName": "K-Cup"
+    }
+  ]
+}
