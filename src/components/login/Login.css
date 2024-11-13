@@ -1,0 +1,82 @@
+h1 {
+  color: #ffc2d1;
+  font-family: "Princess Sofia", cursive;
+  font-size: 100px;
+  margin-bottom: 20px;
+  margin-top: 45px;
+}
+
+h2 {
+  color: #ffc2d1;
+  font-family: "Princess Sofia", cursive;
+  font-size: 75px;
+  margin-bottom: 20px;
+}
+
+h3 {
+  color: #ffc2d1;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 30px;
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: auto;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px, solid, #ffc2d1;
+  padding: 100px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+}
+
+.form-control {
+  text-align: center;
+  padding: 10px;
+  width: 80%;
+  margin-bottom: 20px;
+  border-radius: 4px;
+}
+
+.btn-info {
+  text-align: center;
+  padding: 10px;
+  background-color: #ffc2d1;
+  color: #723d46;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.btn-info:hover {
+  background-color: #ffc2d1;
+  color: #723d46;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transform: scale(1.05);
+}
+
+.register-prompt {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: large;
+  margin-top: 20px;
+  color: #e5989b;
+}
+
+.register-link {
+  color: #ffc2d1;
+}
