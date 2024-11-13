@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { addNewUser } from "../services/userServices";
 import "./RegisterNewUser.css";
 
@@ -89,6 +89,14 @@ export const RegisterNewUser = () => {
           <button type="submit" className="btn-info">
             Create Account
           </button>
+        </div>
+        <div className="link-container">
+          <p>
+            Whoops..{" "}
+            <Link to="/login" className="login-link">
+              take me back!
+            </Link>
+          </p>
         </div>
       </form>
     </div>
