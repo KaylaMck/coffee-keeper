@@ -10,15 +10,20 @@ export const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    return getUserByUsername(username).then((user) => {
-      if (user) {
+    return getUserByUsername(username).then((foundUsers) => {
+      if (foundUsers) {
+        localStorage.removeItem("coffee_user");
+        const user = foundUsers[0];
         localStorage.setItem(
           "coffee_user",
           JSON.stringify({
             id: user.id,
+            name: user.name,
+            email: user.email,
+            username: user.username,
           })
         );
-        navigate("/");
+        navigate("/homepage");
       } else {
         window.alert("Invalid Username");
       }

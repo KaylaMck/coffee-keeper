@@ -1,0 +1,27 @@
+.navbar {
+  display: flex;
+  flex-wrap: nowrap;
+  background-color: #ffc2d1;
+  margin: 0;
+  width: 100%;
+  padding: 1.5rem;
+}
+
+.navbar-item {
+  flex-basis: 10%;
+  list-style-type: none;
+  text-align: center;
+}
+
+.navbar-link {
+  text-decoration: none;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: large;
+  font-weight: bold;
+  color: #723d46;
+  letter-spacing: 1px;
+}
+
+.navbar-logout {
+  margin-left: auto;
+}

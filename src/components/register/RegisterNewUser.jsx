@@ -26,11 +26,12 @@ export const RegisterNewUser = () => {
     addNewUser(user).then((createdUser) => {
       if (createdUser && createdUser.id) {
         localStorage.setItem(
-          "coffee-user",
+          "coffee_user",
           JSON.stringify({
             id: createdUser.id,
             name: createdUser.name,
             username: createdUser.username,
+            email: createdUser.email,
           })
         );
 
@@ -93,7 +94,7 @@ export const RegisterNewUser = () => {
         <div className="link-container">
           <p>
             Whoops..{" "}
-            <Link to="/login" className="login-link">
+            <Link to="/" className="login-link">
               take me back!
             </Link>
           </p>

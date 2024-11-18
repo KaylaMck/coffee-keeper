@@ -29,6 +29,18 @@
       "name": "Chris Lee",
       "email": "chrislee@example.com",
       "username": "clee"
+    },
+    {
+      "name": "Kayla McKenzie",
+      "email": "kmckenzie82@bethelu.edu",
+      "username": "kmckenzie",
+      "id": 6
+    },
+    {
+      "name": "Maggie Bryan",
+      "email": "maggie@yahoo.com",
+      "username": "Maggie Leigh",
+      "id": 7
     }
   ],
   "coffee": [
