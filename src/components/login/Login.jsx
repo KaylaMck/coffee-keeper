@@ -12,7 +12,6 @@ export const Login = () => {
 
     return getUserByUsername(username).then((foundUsers) => {
       if (foundUsers) {
-        localStorage.removeItem("coffee_user");
         const user = foundUsers[0];
         localStorage.setItem(
           "coffee_user",

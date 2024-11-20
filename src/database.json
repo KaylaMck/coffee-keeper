@@ -1,5 +1,5 @@
 {
-  "user": [
+  "users": [
     {
       "id": 1,
       "name": "John Doe",
@@ -43,14 +43,14 @@
       "id": 7
     }
   ],
-  "coffee": [
+  "coffees": [
     {
-      "id": 1,
       "name": "Morning Blend",
       "description": "A smooth, light roast perfect for starting the day.",
-      "userId": 1,
       "coffeeTypeId": 1,
-      "roastId": 1
+      "roastId": 1,
+      "id": 1,
+      "userId": 1
     },
     {
       "id": 2,
@@ -99,9 +99,137 @@
       "userId": 2,
       "coffeeTypeId": 1,
       "roastId": 2
+    },
+    {
+      "name": "Donut Shop",
+      "description": "A full bodied flavor of red fruits, salted caramel, and toasted almonds.",
+      "coffeeTypeId": 3,
+      "roastId": "2",
+      "userId": 1,
+      "id": 9
+    },
+    {
+      "name": "Donut Shop",
+      "coffeeTypeId": 3,
+      "roastId": 2,
+      "description": "A full bodied flavor of red fruits, salted caramel, and toasted almonds.",
+      "userId": 6,
+      "id": 10
+    },
+    {
+      "id": 8,
+      "name": "Morning Bliss",
+      "description": "A light and aromatic coffee that wakes up the senses.",
+      "userId": 1,
+      "coffeeTypeId": 2,
+      "roastId": 1
+    },
+    {
+      "id": 9,
+      "name": "Java Jolt",
+      "description": "A robust and energizing coffee for a strong start.",
+      "userId": 1,
+      "coffeeTypeId": 3,
+      "roastId": 2
+    },
+    {
+      "id": 10,
+      "name": "Midnight Mocha",
+      "description": "A rich, dark roast with a chocolatey twist.",
+      "userId": 2,
+      "coffeeTypeId": 1,
+      "roastId": 3
+    },
+    {
+      "id": 11,
+      "name": "Cinnamon Spice",
+      "description": "A sweet and spicy coffee blend with a warm finish.",
+      "userId": 2,
+      "coffeeTypeId": 2,
+      "roastId": 1
+    },
+    {
+      "id": 12,
+      "name": "Tropical Breeze",
+      "description": "A fruity coffee with notes of coconut and pineapple.",
+      "userId": 3,
+      "coffeeTypeId": 1,
+      "roastId": 2
+    },
+    {
+      "id": 13,
+      "name": "Caramel Delight",
+      "description": "Smooth with a touch of caramel sweetness.",
+      "userId": 3,
+      "coffeeTypeId": 2,
+      "roastId": 1
+    },
+    {
+      "id": 14,
+      "name": "Peach Perfection",
+      "description": "A fresh, medium roast coffee with a subtle peach undertone.",
+      "userId": 4,
+      "coffeeTypeId": 3,
+      "roastId": 2
+    },
+    {
+      "id": 15,
+      "name": "Café Mocha",
+      "description": "A decadent blend of coffee and chocolate.",
+      "userId": 4,
+      "coffeeTypeId": 2,
+      "roastId": 3
+    },
+    {
+      "id": 16,
+      "name": "Vanilla Bean Dream",
+      "description": "A smooth, creamy coffee with a touch of vanilla.",
+      "userId": 5,
+      "coffeeTypeId": 3,
+      "roastId": 1
+    },
+    {
+      "id": 17,
+      "name": "Chocolate Hazelnut",
+      "description": "A combination of rich chocolate and nutty hazelnut flavors.",
+      "userId": 5,
+      "coffeeTypeId": 1,
+      "roastId": 3
+    },
+    {
+      "id": 18,
+      "name": "Maple Magic",
+      "description": "A sweet and smooth coffee with a maple syrup flavor.",
+      "userId": 6,
+      "coffeeTypeId": 1,
+      "roastId": 2
+    },
+    {
+      "id": 19,
+      "name": "Hazelnut Cream",
+      "description": "A rich coffee with a creamy hazelnut flavor.",
+      "userId": 6,
+      "coffeeTypeId": 3,
+      "roastId": 3
+    },
+    {
+      "id": 20,
+      "name": "Berry Burst",
+      "description": "A lively medium roast coffee with a mix of berries.",
+      "userId": 7,
+      "coffeeTypeId": 2,
+      "roastId": 2
+    },
+    {
+      "id": 21,
+      "name": "Nutty Bliss",
+      "description": "A blend with deep nutty undertones and a mild finish.",
+      "userId": 7,
+      "coffeeTypeId": 1,
+      "roastId": 1
     }
   ],
-  "roast": [
+  "roasts": [
     {
       "id": 1,
       "roastType": "Light"
@@ -115,7 +243,7 @@
       "roastType": "Dark"
     }
   ],
-  "coffeeType": [
+  "coffeeTypes": [
     {
       "id": 1,
       "typeName": "Ground"

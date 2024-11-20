@@ -7,7 +7,7 @@ export const WelcomeUser = () => {
   const navigate = useNavigate();
 
   const handleAddCoffeeClick = () => {
-    navigate("add-coffee");
+    navigate("/add-new-coffee");
   };
 
   useEffect(() => {
