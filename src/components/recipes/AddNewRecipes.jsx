@@ -1,35 +1,43 @@
 import { useState } from "react";
-import { addNewCoffee } from "../services/coffeeServices";
 import { useNavigate } from "react-router-dom";
+import { addRecipe } from "../services/recipeServices";
 
-export const AddNewCoffeeForm = () => {
-  const [coffeeName, setCoffeeName] = useState("");
-  const [roastType, setRoastType] = useState("");
+export const AddNewRecipe = () => {
+  const currentUser = JSON.parse(localStorage.getItem("coffee_user"));
+  const [recipeName, setRecipeName] = useState("");
   const [coffeeType, setCoffeeType] = useState("");
+  const [roastType, setRoastType] = useState("");
+  const [ingredients, setIngredients] = useState("");
+  const [instructions, setInstructions] = useState("");
   const [description, setDescription] = useState("");
   const [isFavorite, setIsFavorite] = useState(false);
-  const currentUser = JSON.parse(localStorage.getItem("coffee_user"));
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const newCoffee = {
-      name: coffeeName,
+    const newRecipe = {
+      userId: currentUser.id,
+      recipeName: recipeName,
       coffeeTypeId: parseInt(coffeeType),
       roastId: parseInt(roastType),
+      ingredients: ingredients
+        .split(",")
+        .map((ingredient) => ingredient.trim()),
+      instructions: instructions,
       description: description,
-      userId: currentUser.id,
       isFavorite: isFavorite,
     };
 
-    addNewCoffee(newCoffee).then((createdCoffee) => {
-      if (createdCoffee) {
-        navigate("/coffee-list");
+    addRecipe(newRecipe).then((createdRecipe) => {
+      if (createdRecipe) {
+        navigate("/recipe-list");
       }
-      setCoffeeName("");
-      setRoastType("");
+      setRecipeName("");
       setCoffeeType("");
+      setRoastType("");
+      setIngredients("");
+      setInstructions("");
       setDescription("");
       setIsFavorite(false);
     });
@@ -38,21 +46,20 @@ export const AddNewCoffeeForm = () => {
   return (
     <div className="container d-flex justify-content-center align-items-center min-vh-100">
       <div
-        className="card shadow-lg p-4"
+        className="card shadow-lg p-4 mt-5 mb-5"
         style={{ width: "100%", maxWidth: "400px" }}
       >
         <form className="form" onSubmit={handleSubmit}>
-          <h3 className="text-center mb-4">Add New Coffee</h3>
-
+          <h3 className="text-center mb-4">Add New Recipe</h3>
           <div className="form-group mb-3">
             <input
               className="form-control text-center"
               type="text"
-              value={coffeeName}
-              placeholder="Coffee Name"
+              value={recipeName}
+              placeholder="Recipe Name"
               required
               autoFocus
-              onChange={(e) => setCoffeeName(e.target.value)}
+              onChange={(e) => setRecipeName(e.target.value)}
             />
           </div>
           <div className="form-group mb-3">
@@ -86,13 +93,34 @@ export const AddNewCoffeeForm = () => {
             </select>
           </div>
           <div className="form-group mb-3">
+            <label>Ingredients:</label>
+            <textarea
+              className="form-control text-center"
+              value={ingredients}
+              onChange={(e) => setIngredients(e.target.value)}
+              rows="3"
+              placeholder="e.g., 1 shot espresso, 1/2 cup steamed milk"
+              required
+            ></textarea>
+          </div>
+          <div className="form-group mb-3">
+            <label>Instructions:</label>
+            <textarea
+              className="form-control text-center"
+              value={instructions}
+              onChange={(e) => setInstructions(e.target.value)}
+              rows="3"
+              required
+            ></textarea>
+          </div>
+          <div className="form-group mb-3">
             <label>Description:</label>
             <textarea
               className="form-control text-center"
               value={description}
-              rows="4"
-              required
               onChange={(e) => setDescription(e.target.value)}
+              rows="3"
+              required
             ></textarea>
           </div>
           <div className="form-group mb-3">
@@ -114,7 +142,7 @@ export const AddNewCoffeeForm = () => {
           </div>
           <div className="d-flex justify-content-center mb-3">
             <button type="submit" className="btn btn-info w-100">
-              Add Coffee
+              Add Recipe
             </button>
           </div>
         </form>

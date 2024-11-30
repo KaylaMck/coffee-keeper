@@ -1,33 +1,37 @@
-import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import {
-  deleteCoffee,
-  getCoffeeById,
-  updateCoffee,
-} from "../services/coffeeServices";
-import "./CoffeeDetails.css";
+  deleteRecipe,
+  getRecipeById,
+  updateRecipe,
+} from "../services/recipeServices";
+import "./RecipeDetails.css";
 
-export const CoffeeDetails = () => {
+export const RecipeDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [coffee, setCoffee] = useState(null);
+  const [recipe, setRecipe] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
-  const [coffeeData, setCoffeeData] = useState({
-    name: "",
-    description: "",
+  const [recipeData, setRecipeData] = useState({
+    recipeName: "",
     coffeeTypeId: 0,
     roastId: 0,
+    ingredients: "",
+    instructions: "",
+    description: "",
     isFavorite: false,
   });
 
   useEffect(() => {
-    getCoffeeById(id).then((data) => {
-      setCoffee(data);
-      setCoffeeData({
-        name: data.name,
-        description: data.description,
+    getRecipeById(id).then((data) => {
+      setRecipe(data);
+      setRecipeData({
+        recipeName: data.recipeName,
         coffeeTypeId: data.coffeeTypeId,
         roastId: data.roastId,
+        ingredients: data.ingredients,
+        instructions: data.instructions,
+        description: data.description,
         isFavorite: data.isFavorite,
       });
     });
@@ -39,7 +43,7 @@ export const CoffeeDetails = () => {
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setCoffeeData((prevData) => ({
+    setRecipeData((prevData) => ({
       ...prevData,
       [name]: type === "checkbox" ? checked : value,
     }));
@@ -50,55 +54,55 @@ export const CoffeeDetails = () => {
 
     const currentUser = JSON.parse(localStorage.getItem("coffee_user"));
 
-    const updatedCoffee = {
-      ...coffeeData,
+    const updatedRecipe = {
+      ...recipeData,
       userId: currentUser?.id,
     };
 
-    updateCoffee(id, updatedCoffee).then(() => {
-      setCoffee(updatedCoffee);
+    updateRecipe(id, updatedRecipe).then(() => {
+      setRecipe(updatedRecipe);
       setIsEditing(false);
-      navigate("/coffee-list");
+      navigate("/recipe-list");
     });
   };
 
   const handleDelete = () => {
-    deleteCoffee(id).then(() => {
-      navigate("/coffee-list");
+    deleteRecipe(id).then(() => {
+      navigate("/recipe-list");
     });
   };
 
-  if (!coffee) return <p>Loading...</p>;
+  if (!recipe) return <p>Loading...</p>;
 
   return (
     <div
       className="container d-flex justify-content-center align-items-center position-relative mb-4"
       style={{ minHeight: "100vh" }}
     >
-      <div className="card shadow p-4 w-75">
+      <div className="card shadow p-4 w-75 mt-5 mb-5">
         <div className="d-flex justify-content-center">
-          <h2 className="text-center coffee-title mb-4">
-            {isEditing ? `Edit ${coffee.name}` : coffee.name}
+          <h2 className="text-center recipe-title mb-4">
+            {isEditing ? `Edit ${recipe.recipeName}` : recipe.recipeName}
           </h2>
           {!isEditing && (
             <span
-              className={`heart-icon ${coffee.isFavorite ? "favorite" : ""}`}
+              className={`heart-icon ${recipe.isFavorite ? "favorite" : ""}`}
             >
-              {coffee.isFavorite ? "♥" : "♡"}
+              {recipe.isFavorite ? "♥" : "♡"}
             </span>
           )}
         </div>
         {isEditing ? (
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
-              <label htmlFor="name" className="form-label">
-                Name
+              <label htmlFor="recipeName" className="form-label">
+                Recipe Name
               </label>
               <input
                 type="text"
-                id="name"
-                name="name"
-                value={coffeeData.name}
+                id="recipeName"
+                name="recipeName"
+                value={recipeData.recipeName}
                 onChange={handleInputChange}
                 className="form-control"
               />
@@ -110,7 +114,7 @@ export const CoffeeDetails = () => {
               <select
                 id="coffeeTypeId"
                 name="coffeeTypeId"
-                value={coffeeData.coffeeTypeId}
+                value={recipeData.coffeeTypeId}
                 onChange={handleInputChange}
                 className="form-select"
               >
@@ -126,7 +130,7 @@ export const CoffeeDetails = () => {
               <select
                 id="roastId"
                 name="roastId"
-                value={coffeeData.roastId}
+                value={recipeData.roastId}
                 onChange={handleInputChange}
                 className="form-select"
               >
@@ -136,13 +140,39 @@ export const CoffeeDetails = () => {
               </select>
             </div>
             <div className="mb-3">
+              <label htmlFor="ingredients" className="form-label">
+                Ingredients
+              </label>
+              <textarea
+                id="ingredients"
+                name="ingredients"
+                value={recipeData.ingredients}
+                onChange={handleInputChange}
+                className="form-control"
+                rows="3"
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="instructions" className="form-label">
+                Instructions
+              </label>
+              <textarea
+                id="instructions"
+                name="instructions"
+                value={recipeData.instructions}
+                onChange={handleInputChange}
+                className="form-control"
+                rows="3"
+              />
+            </div>
+            <div className="mb-3">
               <label htmlFor="description" className="form-label">
                 Description
               </label>
               <textarea
                 id="description"
                 name="description"
-                value={coffeeData.description}
+                value={recipeData.description}
                 onChange={handleInputChange}
                 className="form-control"
                 rows="3"
@@ -153,7 +183,7 @@ export const CoffeeDetails = () => {
                 type="checkbox"
                 id="isFavorite"
                 name="isFavorite"
-                checked={coffeeData.isFavorite}
+                checked={recipeData.isFavorite}
                 onChange={handleInputChange}
                 className="form-check-input"
               />
@@ -176,23 +206,27 @@ export const CoffeeDetails = () => {
           </form>
         ) : (
           <>
-            <div className="mb-3">
-              <p>
-                <strong>Type:</strong> {coffee.coffeeType?.typeName}
-              </p>
-              <p>
-                <strong>Roast:</strong> {coffee.roast?.roastType}
-              </p>
-              <p>
-                <strong>Description:</strong> {coffee.description}
-              </p>
-            </div>
+            <p>
+              <strong>Type:</strong> {recipe.coffeeType?.typeName}
+            </p>
+            <p>
+              <strong>Roast:</strong> {recipe.roast?.roastType}
+            </p>
+            <p>
+              <strong>Ingredients:</strong> {recipe.ingredients}
+            </p>
+            <p>
+              <strong>Instructions:</strong> {recipe.instructions}
+            </p>
+            <p>
+              <strong>Description:</strong> {recipe.description}
+            </p>
             <div className="d-flex justify-content-between">
               <button className="btn custom-btn" onClick={handleEdit}>
-                Edit Coffee
+                Edit Recipe
               </button>
               <button className="btn custom-btn" onClick={handleDelete}>
-                Delete Coffee
+                Delete Recipe
               </button>
             </div>
           </>

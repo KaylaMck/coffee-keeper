@@ -1,3 +1,31 @@
+:root {
+  --primary-color: #644234;
+  --secondary-color: #f5e7de;
+  --hover-scale: 1.05;
+}
+
 body {
-  background-color: #723d46;
+  background-image: url(https://st2.depositphotos.com/5301930/7757/i/450/depositphotos_77579508-stock-illustration-coffee-beans-seamless-pattern.jpg);
+}
+
+h1 {
+  font-family: "Princess Sofia", Georgia, "Times New Roman", Times, serif;
+}
+
+.form-control {
+  border-color: var(--primary-color);
+}
+
+.form-control:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 5px rgba(122, 91, 71, 0.5);
+}
+
+.card {
+  background-color: var(--secondary-color);
+  font-family: Georgia, "Times New Roman", Times, serif;
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+  width: 100%;
+  max-width: 100%;
 }

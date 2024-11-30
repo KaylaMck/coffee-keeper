@@ -10,54 +10,70 @@ export const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    return getUserByUsername(username).then((foundUsers) => {
-      if (foundUsers) {
-        const user = foundUsers[0];
-        localStorage.setItem(
-          "coffee_user",
-          JSON.stringify({
-            id: user.id,
-            name: user.name,
-            email: user.email,
-            username: user.username,
-          })
-        );
-        navigate("/homepage");
-      } else {
-        window.alert("Invalid Username");
-      }
-    });
+    // Handling loading state and error messages
+    getUserByUsername(username)
+      .then((foundUsers) => {
+        if (foundUsers && foundUsers.length > 0) {
+          const user = foundUsers[0];
+          localStorage.setItem(
+            "coffee_user",
+            JSON.stringify({
+              id: user.id,
+              name: user.name,
+              email: user.email,
+              username: user.username,
+            })
+          );
+          navigate("/homepage");
+        } else {
+          alert("Invalid Username");
+        }
+      })
+      .catch((error) => {
+        alert("An error occurred during login. Please try again.");
+        console.error(error);
+      });
   };
 
   return (
-    <main className="form-container">
-      <section>
-        <form className="form" onSubmit={handleLogin}>
-          <h1>Coffee Keeper</h1>
-          <h3>Please Sign In</h3>
-          <div className="form-group">
+    <main
+      className="container d-flex justify-content-center align-items-center"
+      style={{ minHeight: "100vh" }}
+    >
+      <section
+        className="card p-4 shadow-sm w-100"
+        style={{ maxWidth: "400px" }}
+      >
+        <h1 className="text-center mb-4">Coffee Keeper</h1>
+        <h3 className="text-center mb-4">Please Sign In</h3>
+        <form onSubmit={handleLogin}>
+          <div className="mb-3 text-center">
+            <label htmlFor="username" className="form-label">
+              Username
+            </label>
             <input
-              className="form-control"
-              type="username"
+              id="username"
+              type="text"
+              className="form-control text-center"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              placeholder="username"
+              placeholder="Enter Your Username"
               required
               autoFocus
             />
-            <div className="button-container">
-              <button className="btn-info" type="submit">
-                LOGIN
-              </button>
-            </div>
-            <div className="register-prompt">
-              <p>
-                Not a member?{" "}
-                <Link to="/register" className="register-link">
-                  Sign up here!
-                </Link>
-              </p>
-            </div>
+          </div>
+          <div className="mb-3 text-center">
+            <button type="submit" className="btn custom-login-btn w-100">
+              LOGIN
+            </button>
+          </div>
+          <div className="text-center">
+            <p>
+              Not a member?{" "}
+              <Link to="/register" className="custom-link">
+                Sign up here!
+              </Link>
+            </p>
           </div>
         </form>
       </section>

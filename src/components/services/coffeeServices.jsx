@@ -39,3 +39,28 @@ export const updateCoffee = (id, coffeeData) => {
 export const getAllCoffees = () => {
   return fetch(`http://localhost:8088/coffees`).then((res) => res.json);
 };
+
+// export const addCoffeeToFavorites = (userId, coffeeId) => {
+//   return fetch("http://localhost:8088/coffeeFavorites", {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify({
+//       userId,
+//       coffeeId,
+//     }),
+//   }).then((res) => res.json());
+// };
+
+// export const removeCoffeeFromFavorites = () => {
+//   return fetch(`http://localhost:8088/coffeeFavorites/${userId}/${coffeeId}`, {
+//     method: "DELETE",
+//   }).then((res) => res.json());
+// };
+
+// export const getFavoriteCoffees = (userId) => {
+//   return fetch(`http://localhost:8088/coffeeFavorites/${userId}`).then((res) =>
+//     res.json()
+//   );
+// };

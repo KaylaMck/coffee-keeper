@@ -1,15 +1,21 @@
 import { useEffect, useState } from "react";
-import { getCoffeeByUserId, updateCoffee } from "../services/coffeeServices";
 import { useNavigate } from "react-router-dom";
-import "./CoffeeList.css";
+import { getRecipesByUserId } from "../services/recipeServices";
 
-export const CoffeeList = () => {
-  const [coffees, setCoffees] = useState([]);
+export const RecipeList = () => {
+  const [recipes, setRecipes] = useState([]);
   const [filterCategory, setFilterCategory] = useState("");
   const [filterValue, setFilterValue] = useState("");
-  const [filteredCoffees, setFilteredCoffees] = useState([]);
+  const [filteredRecipes, setFilteredRecipes] = useState([]);
   const currentUser = JSON.parse(localStorage.getItem("coffee_user"));
   const navigate = useNavigate();
+
+  // Filter categories and their options
+  const coffeeTypes = [
+    { id: 1, typeName: "Ground" },
+    { id: 2, typeName: "Whole Bean" },
+    { id: 3, typeName: "K-Cup" },
+  ];
 
   const roasts = [
     { id: 1, roastType: "Light" },
@@ -17,58 +23,53 @@ export const CoffeeList = () => {
     { id: 3, roastType: "Dark" },
   ];
 
-  const coffeeTypes = [
-    { id: 1, typeName: "Ground" },
-    { id: 2, typeName: "Whole Bean" },
-    { id: 3, typeName: "K-Cup" },
-  ];
-
-  const getCoffees = () => {
-    getCoffeeByUserId(currentUser.id).then(setCoffees);
+  const getRecipes = () => {
+    getRecipesByUserId(currentUser.id).then(setRecipes);
   };
 
   useEffect(() => {
-    getCoffees();
+    getRecipes();
   }, []);
 
-  const handleCoffeeClick = (id) => {
-    navigate(`/coffee/${id}`);
+  const handleRecipeClick = (id) => {
+    navigate(`/recipe/${id}`);
   };
 
   useEffect(() => {
     if (!filterCategory || filterCategory === "favorite") {
-      setFilteredCoffees(
-        coffees.filter((coffee) =>
-          filterCategory === "favorite" ? coffee.isFavorite === true : true
+      setFilteredRecipes(
+        recipes.filter((recipe) =>
+          filterCategory === "favorite" ? recipe.isFavorite === true : true
         )
       );
     } else if (filterCategory && filterValue) {
-      setFilteredCoffees(
-        coffees.filter((coffee) => {
+      setFilteredRecipes(
+        recipes.filter((recipe) => {
           if (filterCategory === "type") {
             return coffeeTypes.find(
               (type) =>
-                type.id === coffee.coffeeTypeId && type.typeName === filterValue
+                type.id === recipe.coffeeTypesId &&
+                type.typeName === filterValue
             );
           } else if (filterCategory === "roast") {
             return roasts.find(
               (roast) =>
-                roast.id === coffee.roastId && roast.roastType === filterValue
+                roast.id === recipe.roastId && roast.roastType === filterValue
             );
           }
           return true;
         })
       );
     } else {
-      setFilteredCoffees(coffees);
+      setFilteredRecipes(recipes);
     }
-  }, [filterCategory, filterValue, coffees]);
+  }, [filterCategory, filterValue, recipes]);
 
   return (
     <main className="container" style={{ minHeight: "100vh" }}>
       <div className="d-flex justify-content-center align-items-center">
         <section className="container">
-          <h1 className="text-center mb-4 custom-text pt-5">My Coffees</h1>
+          <h1 className="text-center mb-4 custom-text pt-5">My Recipes</h1>
           <div className="mb-4">
             <label className="form-label me-2">Filter by:</label>
             <select
@@ -84,6 +85,7 @@ export const CoffeeList = () => {
               <option value="roast">Roast</option>
               <option value="favorite">Favorites</option>
             </select>
+
             {(filterCategory === "type" || filterCategory === "roast") && (
               <>
                 <label className="form-label me-2">
@@ -117,26 +119,26 @@ export const CoffeeList = () => {
               </>
             )}
           </div>
-          {filteredCoffees.length > 0 ? (
-            <div className="row g-3 justify-content-center">
-              {filteredCoffees.map((coffee) => (
-                <div className="col-12 col-lg-6" key={coffee.id}>
+          {filteredRecipes.length > 0 ? (
+            <div className="row g-3 justify-content-around">
+              {filteredRecipes.map((recipe) => (
+                <div className="col-12 col-lg-6" key={recipe.id}>
                   <div className="card shadow-sm h-100">
                     <div className="card-body d-flex flex-column">
                       <h5 className="card-title mb-4 d-flex justify-content-between align-items-center">
-                        {coffee.name}
+                        {recipe.recipeName}
                         <span
                           className={`heart-icon ${
-                            coffee.isFavorite ? "favorite" : ""
+                            recipe.isFavorite ? "favorite" : ""
                           }`}
                         >
-                          {coffee.isFavorite ? "♥" : "♡"}
+                          {recipe.isFavorite ? "♥" : "♡"}
                         </span>
                       </h5>
-                      <p className="card-text">{coffee.description}</p>
+                      <p className="card-text">{recipe.description}</p>
                       <button
                         className="btn btn-info mt-auto"
-                        onClick={() => handleCoffeeClick(coffee.id)}
+                        onClick={() => handleRecipeClick(recipe.id)}
                       >
                         View Details
                       </button>
@@ -146,7 +148,7 @@ export const CoffeeList = () => {
               ))}
             </div>
           ) : (
-            <p className="text-center custom-text">No Coffees Added Yet.</p>
+            <p className="text-center custom-text">No Recipes Added Yet.</p>
           )}
         </section>
       </div>
